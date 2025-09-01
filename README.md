@@ -1,13 +1,13 @@
-# Lanzador de Preguntas Conversacionales.
+# Generador de Poses de Personajes
 
-#### Esta aplicación es una demostración full-stack que genera preguntas de estilo podcast sobre un tema dado por el usuario. Utiliza una API de inteligencia artificial para generar el contenido y una API de backend para gestionar las peticiones, con una interfaz de usuario simple en el frontend.
+#### Esta aplicación es una demostración full-stack que combina imagenes para lograr un personaje único. La API gestiona la base de datos con la informcion del personaje, para luego con Blazor diseñar una interfaz de usuario donde elegir expresiones, tipo de cuerpo y pose.
 
 ## Caracteristicas:
-- Generación de Contenido con IA: Utiliza la API de Gemini para generar preguntas dinámicas.
+- Gestión de base de datos SQLite.
 
-- Servicio en Segundo Plano: El backend incluye un servicio que genera preguntas de forma automática.
+- Servicio en Segundo Plano:.
 
-- API RESTful: Endpoints para que un cliente pueda solicitar nuevas preguntas.
+- API RESTful: Endpoints.
 
 - Arquitectura Modular: Diseñado con inyección de dependencias para una fácil gestión de servicios.
 
