@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Generador de poses")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f761234c51bda331ff7910388e14ab036347989")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5a9b24baa9c7a7f5bda2a11af9f88906e0e58f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Generador de poses")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Generador de poses")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

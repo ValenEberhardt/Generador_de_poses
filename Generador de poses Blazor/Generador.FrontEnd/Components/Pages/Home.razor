@@ -10,17 +10,42 @@
     <p><em>..Cargando Datos</em></p>
 }
 else {
+
+
     <p>¡Datos cargados correctamente!</p>
-    <ul>
-        @foreach (var cuerpo in personajes.Cuerpos)
-        {
-            <li>Cuerpo: @cuerpo.Nombre</li>
-        }
-    </ul>
+
+    <p>Seleccionado: @cuerpoSeleccionado?.Nombre (@cuerpoSeleccionado?.RutaImagen)</p>
+
+    <div class="character-generator">
+        <div class="character-display">
+    @if(cuerpoSeleccionado != null){
+        <img src="/images/cuerpos/@cuerpoSeleccionado.RutaImagen" alt="Cuerpo del personaje" class="pixel-art-image" />
+    }
+    @if(poseSeleccionada != null){
+        <img src="/images/poses/@poseSeleccionada.RutaImagen" alt="Pose del personaje" class="pixel-art-image" />
+    }
+    @if(expresionSeleccionada != null){
+        <img src="/images/expresions/@expresionSeleccionada.RutaImagen" alt="Expresion del personaje" class="pixel-art-image" />
+    }
+</div>
+
+        <div class="controls">
+            <h4>Cuerpos</h4>
+            @foreach (var cuerpo in personajes.Cuerpos)
+            {
+                <button @onclick="() => SeleccionarCuerpo(cuerpo)" >@cuerpo.Nombre</button>
+                
+            }
+        </div>
+    </div>
 }
+
 
 @code{
     private PersonajesDto? personajes;
+    private ElementoPersonajeDto? cuerpoSeleccionado;
+    private ElementoPersonajeDto? poseSeleccionada;
+    private ElementoPersonajeDto? expresionSeleccionada;
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,11 +53,26 @@ else {
         {
             var client = HttpClientFactory.CreateClient("Generador de poses");
             personajes = await client.GetFromJsonAsync<PersonajesDto>("api/personajes");
-            
+
+            //seleccionar el primer elemnto de cada lista al iniciar
+            cuerpoSeleccionado = personajes?.Cuerpos.FirstOrDefault();
+            poseSeleccionada = personajes?.Poses.FirstOrDefault();
+            expresionSeleccionada = personajes?.Expresions.FirstOrDefault();
+
+
         }
         catch(Exception ex)
         {
             Console.WriteLine($"Error al cargar los datos: {ex.Message}");
+     
+     
         }
+    }
+
+    private void SeleccionarCuerpo(ElementoPersonajeDto nuevoCuerpo)
+    {
+        Console.WriteLine($"SeleccionarCuerpo called with: {nuevoCuerpo?.Nombre}");
+        cuerpoSeleccionado = nuevoCuerpo;
+
     }
 }
