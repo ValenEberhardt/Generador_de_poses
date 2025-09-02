@@ -1,29 +1,38 @@
 ﻿@page "/"
 @inject IHttpClientFactory HttpClientFactory
+@using Generador.FrontEnd.Models
+@using static System.Net.WebRequestMethods
+
 
 <h3>Prueba de conección a la API</h3>
 
-@if (elementos == null){
+@if (personajes == null){
     <p><em>..Cargando Datos</em></p>
 }
 else {
-    <pre>@elementos</pre>
+    <p>¡Datos cargados correctamente!</p>
+    <ul>
+        @foreach (var cuerpo in personajes.Cuerpos)
+        {
+            <li>Cuerpo: @cuerpo.Nombre</li>
+        }
+    </ul>
 }
 
 @code{
-    private string elementos = string.Empty;
+    private PersonajesDto? personajes;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             var client = HttpClientFactory.CreateClient("Generador de poses");
-            var respuesta = await client.GetStringAsync("api/personajes");
-            elementos = respuesta;
+            personajes = await client.GetFromJsonAsync<PersonajesDto>("api/personajes");
+            
         }
-        catch(HttpRequestException e)
+        catch(Exception ex)
         {
-            elementos = $"Error: {e.Message}"; 
+            Console.WriteLine($"Error al cargar los datos: {ex.Message}");
         }
     }
 }
