@@ -1,7 +1,29 @@
 ﻿@page "/"
+@inject IHttpClientFactory HttpClientFactory
 
-<PageTitle>Home</PageTitle>
+<h3>Prueba de conección a la API</h3>
 
-<h1>Hello, world!</h1>
+@if (elementos == null){
+    <p><em>..Cargando Datos</em></p>
+}
+else {
+    <pre>@elementos</pre>
+}
 
-Welcome to your new app.
+@code{
+    private string elementos = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Generador de poses");
+            var respuesta = await client.GetStringAsync("api/personajes");
+            elementos = respuesta;
+        }
+        catch(HttpRequestException e)
+        {
+            elementos = $"Error: {e.Message}"; 
+        }
+    }
+}
